@@ -3,6 +3,12 @@
 @import "shadcn/tailwind.css";
 @import '@clerk/ui/themes/shadcn.css';
 
+/* Hide the browser's native password reveal button so it doesn't duplicate Clerk's */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {

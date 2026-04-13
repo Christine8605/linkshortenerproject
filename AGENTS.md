@@ -187,6 +187,8 @@ export async function getLinkByShortCode(shortCode: string) {
 - **Protected Routes**: Use Clerk's `auth()` middleware or components
 - **User Context**: Access user info via `useUser()` hook in client components
 
+> ⚠️ **NEVER use `middleware.ts`** — it is deprecated in Next.js 16.x (the version used in this project). Use **`proxy.ts`** instead for all middleware logic (e.g. Clerk's `clerkMiddleware`). Any code that creates or references `middleware.ts` will not work correctly.
+
 ### Protected Server Actions
 
 ```typescript
