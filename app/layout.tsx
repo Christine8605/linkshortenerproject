@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
-import { shadcn } from "@clerk/themes";
+import { shadcn } from "@clerk/ui/themes";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Header } from "@/components/Header";
 import "./globals.css";
