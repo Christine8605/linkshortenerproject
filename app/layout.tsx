@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
+import { shadcn } from "@clerk/ui/themes";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Header } from "@/components/Header";
 import "./globals.css";
@@ -33,11 +34,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <ClerkProvider
           appearance={{
-            baseTheme: undefined,
-            elements: {
-              modalBackdrop: "bg-black/50",
-              modalContent: "bg-white dark:bg-zinc-900",
-            },
+            theme: shadcn,
           }}
         >
           <Header />
