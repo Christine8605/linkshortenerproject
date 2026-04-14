@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "hooks": {
+    "postToolUse": [
+      {
+        "type": "command",
+        "bash": "bash .github/hooks/format.sh",
+        "powershell": "pwsh -NoProfile -ExecutionPolicy Bypass -File \".github\\hooks\\format.ps1\""
+      }
+    ]
+  }
+}

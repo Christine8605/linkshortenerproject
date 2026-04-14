@@ -1,6 +1,6 @@
-import { db } from '@/db';
-import { links } from '@/db/schema';
-import { and, desc, eq } from 'drizzle-orm';
+import { db } from "@/db";
+import { links } from "@/db/schema";
+import { and, desc, eq } from "drizzle-orm";
 
 export async function getLinksByUserId(userId: string) {
   return db
@@ -17,10 +17,7 @@ interface InsertLinkInput {
 }
 
 export async function insertLink(input: InsertLinkInput) {
-  const result = await db
-    .insert(links)
-    .values(input)
-    .returning();
+  const result = await db.insert(links).values(input).returning();
   return result[0];
 }
 
@@ -29,7 +26,11 @@ interface UpdateLinkInput {
   shortCode: string;
 }
 
-export async function updateLink(id: number, userId: string, input: UpdateLinkInput) {
+export async function updateLink(
+  id: number,
+  userId: string,
+  input: UpdateLinkInput,
+) {
   const result = await db
     .update(links)
     .set({ url: input.url, shortCode: input.shortCode, updatedAt: new Date() })

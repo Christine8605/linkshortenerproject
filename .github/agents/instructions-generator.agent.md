@@ -1,9 +1,8 @@
 ---
 name: Instructions Generator
 description: This agent generates highly specific agent instruction files.
-tools: ['read', 'edit', 'search', 'web']
+tools: ["read", "edit", "search", "web"]
 argument-hint: The inputs this agent expects, e.g., "a task to implement" or "a question to answer".
-
 ---
 
 <!-- Tip: Use /create-agent in chat to generate content with agent assistance -->

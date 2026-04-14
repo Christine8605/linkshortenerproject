@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { Button } from '@/components/ui/button';
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
+} from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -19,23 +19,23 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { createLinkAction } from './actions';
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { createLinkAction } from "./actions";
 
 const formSchema = z.object({
-  url: z.string().url({ message: 'Please enter a valid URL' }),
+  url: z.string().url({ message: "Please enter a valid URL" }),
   shortCode: z
     .string()
-    .max(50, { message: 'Short code must be at most 50 characters' })
+    .max(50, { message: "Short code must be at most 50 characters" })
     .regex(/^[a-zA-Z0-9_-]*$/, {
-      message: 'Only letters, numbers, hyphens, and underscores',
+      message: "Only letters, numbers, hyphens, and underscores",
     })
-    .refine((v) => v === '' || v.length >= 3, {
-      message: 'Short code must be at least 3 characters',
+    .refine((v) => v === "" || v.length >= 3, {
+      message: "Short code must be at least 3 characters",
     })
     .optional()
-    .or(z.literal('')),
+    .or(z.literal("")),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -46,7 +46,7 @@ export function CreateLinkDialog() {
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: { url: '', shortCode: '' },
+    defaultValues: { url: "", shortCode: "" },
   });
 
   async function onSubmit(values: FormValues) {
@@ -78,7 +78,10 @@ export function CreateLinkDialog() {
           <DialogTitle>Create a new short link</DialogTitle>
         </DialogHeader>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="flex flex-col gap-4"
+          >
             <FormField
               control={form.control}
               name="url"
@@ -86,7 +89,10 @@ export function CreateLinkDialog() {
                 <FormItem>
                   <FormLabel>Destination URL</FormLabel>
                   <FormControl>
-                    <Input placeholder="https://example.com/long-url" {...field} />
+                    <Input
+                      placeholder="https://example.com/long-url"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -97,7 +103,12 @@ export function CreateLinkDialog() {
               name="shortCode"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Short code <span className="text-muted-foreground font-normal">(optional)</span></FormLabel>
+                  <FormLabel>
+                    Short code{" "}
+                    <span className="text-muted-foreground font-normal">
+                      (optional)
+                    </span>
+                  </FormLabel>
                   <FormControl>
                     <Input placeholder="auto-generated if blank" {...field} />
                   </FormControl>
@@ -108,8 +119,12 @@ export function CreateLinkDialog() {
             {serverError && (
               <p className="text-sm text-destructive">{serverError}</p>
             )}
-            <Button type="submit" disabled={form.formState.isSubmitting} className="self-end">
-              {form.formState.isSubmitting ? 'Creating…' : 'Create'}
+            <Button
+              type="submit"
+              disabled={form.formState.isSubmitting}
+              className="self-end"
+            >
+              {form.formState.isSubmitting ? "Creating…" : "Create"}
             </Button>
           </form>
         </Form>

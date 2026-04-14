@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { Pencil } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { Pencil } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
+} from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -20,18 +20,18 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { editLinkAction } from './actions';
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { editLinkAction } from "./actions";
 
 const formSchema = z.object({
-  url: z.string().url({ message: 'Please enter a valid URL' }),
+  url: z.string().url({ message: "Please enter a valid URL" }),
   shortCode: z
     .string()
-    .min(3, { message: 'Short code must be at least 3 characters' })
-    .max(50, { message: 'Short code must be at most 50 characters' })
+    .min(3, { message: "Short code must be at least 3 characters" })
+    .max(50, { message: "Short code must be at most 50 characters" })
     .regex(/^[a-zA-Z0-9_-]+$/, {
-      message: 'Only letters, numbers, hyphens, and underscores',
+      message: "Only letters, numbers, hyphens, and underscores",
     }),
 });
 
@@ -73,14 +73,19 @@ export function EditLinkDialog({ id, url, shortCode }: EditLinkDialogProps) {
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
-        <Button variant="outline" size="icon" aria-label="Edit link"><Pencil className="h-4 w-4" /></Button>
+        <Button variant="outline" size="icon" aria-label="Edit link">
+          <Pencil className="h-4 w-4" />
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Edit short link</DialogTitle>
         </DialogHeader>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="flex flex-col gap-4"
+          >
             <FormField
               control={form.control}
               name="url"
@@ -88,7 +93,10 @@ export function EditLinkDialog({ id, url, shortCode }: EditLinkDialogProps) {
                 <FormItem>
                   <FormLabel>Destination URL</FormLabel>
                   <FormControl>
-                    <Input placeholder="https://example.com/long-url" {...field} />
+                    <Input
+                      placeholder="https://example.com/long-url"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -119,7 +127,7 @@ export function EditLinkDialog({ id, url, shortCode }: EditLinkDialogProps) {
                 Cancel
               </Button>
               <Button type="submit" disabled={form.formState.isSubmitting}>
-                {form.formState.isSubmitting ? 'Saving…' : 'Save changes'}
+                {form.formState.isSubmitting ? "Saving…" : "Save changes"}
               </Button>
             </div>
           </form>

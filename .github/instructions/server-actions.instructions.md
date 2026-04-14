@@ -48,12 +48,12 @@ export async function createLink(input: CreateLinkInput) {
   // ...
   return { success: true, data: link };
   // or
-  return { success: false, error: 'Invalid input' };
+  return { success: false, error: "Invalid input" };
 }
 
 // ❌ Avoid
 export async function createLink(input: CreateLinkInput) {
-  throw new Error('Invalid input');
+  throw new Error("Invalid input");
 }
 ```
 
@@ -113,9 +113,10 @@ import { db } from '@/db';
 import { links } from '@/db/schema';
 await db.insert(links).values({ ... });
 ```
+
 ---
-applyTo: "**"
----
+
+## applyTo: "\*\*"
 
 # Server Actions
 
@@ -134,11 +135,11 @@ applyTo: "**"
 
 ```typescript
 // app/dashboard/actions.ts
-'use server';
+"use server";
 
-import { z } from 'zod';
-import { auth } from '@clerk/nextjs/server';
-import { createLink } from '@/data/links';
+import { z } from "zod";
+import { auth } from "@clerk/nextjs/server";
+import { createLink } from "@/data/links";
 
 const createLinkSchema = z.object({
   originalUrl: z.string().url(),
@@ -150,12 +151,15 @@ interface CreateLinkInput {
 
 export async function createLinkAction(input: CreateLinkInput) {
   const { userId } = await auth();
-  if (!userId) return { success: false, error: 'Unauthorized' };
+  if (!userId) return { success: false, error: "Unauthorized" };
 
   const parsed = createLinkSchema.safeParse(input);
-  if (!parsed.success) return { success: false, error: 'Invalid input' };
+  if (!parsed.success) return { success: false, error: "Invalid input" };
 
-  const link = await createLink({ userId, originalUrl: parsed.data.originalUrl });
+  const link = await createLink({
+    userId,
+    originalUrl: parsed.data.originalUrl,
+  });
   return { success: true, data: link };
 }
 ```

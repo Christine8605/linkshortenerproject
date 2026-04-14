@@ -1,16 +1,16 @@
-import { auth } from '@clerk/nextjs/server';
-import { redirect } from 'next/navigation';
-import { getLinksByUserId } from '@/data/links';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { CreateLinkDialog } from './CreateLinkDialog';
-import { EditLinkDialog } from './EditLinkDialog';
-import { DeleteLinkDialog } from './DeleteLinkDialog';
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
+import { getLinksByUserId } from "@/data/links";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CreateLinkDialog } from "./CreateLinkDialog";
+import { EditLinkDialog } from "./EditLinkDialog";
+import { DeleteLinkDialog } from "./DeleteLinkDialog";
 
 export default async function Dashboard() {
   const { userId } = await auth();
 
   if (!userId) {
-    redirect('/');
+    redirect("/");
   }
 
   const links = await getLinksByUserId(userId);
@@ -22,7 +22,9 @@ export default async function Dashboard() {
         <CreateLinkDialog />
       </div>
       {links.length === 0 ? (
-        <p className="text-muted-foreground">You haven&apos;t created any links yet.</p>
+        <p className="text-muted-foreground">
+          You haven&apos;t created any links yet.
+        </p>
       ) : (
         <ul className="flex flex-col gap-4">
           {links.map((link) => (
@@ -34,8 +36,15 @@ export default async function Dashboard() {
                       {link.url}
                     </CardTitle>
                     <div className="flex shrink-0 gap-2">
-                      <EditLinkDialog id={link.id} url={link.url} shortCode={link.shortCode} />
-                      <DeleteLinkDialog id={link.id} shortCode={link.shortCode} />
+                      <EditLinkDialog
+                        id={link.id}
+                        url={link.url}
+                        shortCode={link.shortCode}
+                      />
+                      <DeleteLinkDialog
+                        id={link.id}
+                        shortCode={link.shortCode}
+                      />
                     </div>
                   </div>
                 </CardHeader>

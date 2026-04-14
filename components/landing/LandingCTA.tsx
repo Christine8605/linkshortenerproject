@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { SignInButton, SignUpButton } from '@clerk/nextjs';
-import { Button } from '@/components/ui/button';
+import { SignInButton, SignUpButton } from "@clerk/nextjs";
+import { Button } from "@/components/ui/button";
 
 export function LandingCTA() {
   return (

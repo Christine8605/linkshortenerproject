@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Trash2 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { useState } from "react";
+import { Trash2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import { deleteLinkAction } from './actions';
+} from "@/components/ui/dialog";
+import { deleteLinkAction } from "./actions";
 
 interface DeleteLinkDialogProps {
   id: number;
@@ -42,16 +42,20 @@ export function DeleteLinkDialog({ id, shortCode }: DeleteLinkDialogProps) {
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
-        <Button variant="destructive" size="icon" aria-label="Delete link"><Trash2 className="h-4 w-4" /></Button>
+        <Button variant="destructive" size="icon" aria-label="Delete link">
+          <Trash2 className="h-4 w-4" />
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Delete short link</DialogTitle>
         </DialogHeader>
         <p className="text-sm text-muted-foreground">
-          Are you sure you want to delete{' '}
-          <span className="font-mono font-medium text-foreground">{shortCode}</span>?
-          This action cannot be undone.
+          Are you sure you want to delete{" "}
+          <span className="font-mono font-medium text-foreground">
+            {shortCode}
+          </span>
+          ? This action cannot be undone.
         </p>
         {serverError && (
           <p className="text-sm text-destructive">{serverError}</p>
@@ -71,7 +75,7 @@ export function DeleteLinkDialog({ id, shortCode }: DeleteLinkDialogProps) {
             onClick={handleConfirm}
             disabled={loading}
           >
-            {loading ? 'Deleting…' : 'Delete'}
+            {loading ? "Deleting…" : "Delete"}
           </Button>
         </div>
       </DialogContent>

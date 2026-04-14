@@ -1,7 +1,9 @@
 <!-- BEGIN:nextjs-agent-rules -->
+
 # This is NOT the Next.js you know
 
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
+
 <!-- END:nextjs-agent-rules -->
 
 # Link Shortener Project — Agent Coding Instructions
@@ -124,12 +126,12 @@ export function LinkCard({ linkId, shortCode, onClick }: LinkCardProps) {
 Mark with `'use client'` at the top of the file. Minimize the scope of client components:
 
 ```typescript
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
 export function LinkForm() {
-  const [url, setUrl] = useState('');
+  const [url, setUrl] = useState("");
   // ...
 }
 ```
@@ -143,16 +145,16 @@ export function LinkForm() {
 All database tables are defined in `/db/schema.ts`:
 
 ```typescript
-import { pgTable, serial, text, timestamp, integer } from 'drizzle-orm/pg-core';
+import { pgTable, serial, text, timestamp, integer } from "drizzle-orm/pg-core";
 
-export const links = pgTable('links', {
-  id: serial('id').primaryKey(),
-  userId: text('user_id').notNull(),
-  originalUrl: text('original_url').notNull(),
-  shortCode: text('short_code').notNull().unique(),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
-  expiresAt: timestamp('expires_at'),
-  clickCount: integer('click_count').default(0),
+export const links = pgTable("links", {
+  id: serial("id").primaryKey(),
+  userId: text("user_id").notNull(),
+  originalUrl: text("original_url").notNull(),
+  shortCode: text("short_code").notNull().unique(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  expiresAt: timestamp("expires_at"),
+  clickCount: integer("click_count").default(0),
 });
 ```
 
@@ -166,12 +168,13 @@ export const links = pgTable('links', {
 // ✅ Good: Isolated query function
 export async function getLinkByShortCode(shortCode: string) {
   try {
-    const result = await db.select().from(links).where(
-      eq(links.shortCode, shortCode)
-    );
+    const result = await db
+      .select()
+      .from(links)
+      .where(eq(links.shortCode, shortCode));
     return result[0] || null;
   } catch (error) {
-    console.error('Database query failed:', error);
+    console.error("Database query failed:", error);
     return null;
   }
 }
@@ -192,13 +195,13 @@ export async function getLinkByShortCode(shortCode: string) {
 ### Protected Server Actions
 
 ```typescript
-import { auth } from '@clerk/nextjs/server';
+import { auth } from "@clerk/nextjs/server";
 
 export async function createLink(originalUrl: string) {
   const { userId } = await auth();
-  
+
   if (!userId) {
-    throw new Error('Unauthorized');
+    throw new Error("Unauthorized");
   }
 
   // Create link for authenticated user
@@ -223,7 +226,7 @@ export async function createLink(originalUrl: string) {
 // ✅ Good: Tailwind + shadcn/ui
 export function LinkButton() {
   return (
-    <Button 
+    <Button
       className="mt-4 px-6 py-2 bg-blue-600 hover:bg-blue-700 dark:bg-blue-900"
     >
       Create Link
@@ -242,13 +245,13 @@ Create API routes in the app directory under `/app/api/[route]/route.ts`:
 
 ```typescript
 // /app/api/links/route.ts
-import { NextRequest, NextResponse } from 'next/server';
-import { auth } from '@clerk/nextjs/server';
+import { NextRequest, NextResponse } from "next/server";
+import { auth } from "@clerk/nextjs/server";
 
 export async function POST(req: NextRequest) {
   const { userId } = await auth();
   if (!userId) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   const { originalUrl } = await req.json();
@@ -261,14 +264,14 @@ export async function POST(req: NextRequest) {
 For mutations within components/pages, use Next.js Server Actions (no file needed):
 
 ```typescript
-'use server';
+"use server";
 
-import { auth } from '@clerk/nextjs/server';
+import { auth } from "@clerk/nextjs/server";
 
 export async function createLink(originalUrl: string) {
   const { userId } = await auth();
-  if (!userId) throw new Error('Unauthorized');
-  
+  if (!userId) throw new Error("Unauthorized");
+
   // Create and return link
 }
 ```
@@ -297,9 +300,9 @@ try {
     // Handle validation error
   } else {
     // Log unexpected error
-    console.error('Unexpected error:', error);
+    console.error("Unexpected error:", error);
   }
-  throw new Error('Operation failed. Please try again.');
+  throw new Error("Operation failed. Please try again.");
 }
 ```
 
