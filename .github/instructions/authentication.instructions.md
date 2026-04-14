@@ -1,3 +1,7 @@
+---
+description: Read this before implementing or modifying authentication for this project.
+---
+
 # Authentication (Clerk)
 
 This document defines the authentication standards for the Link Shortener project using Clerk. **All authentication must be handled exclusively through Clerk. No alternative authentication methods are permitted.**
