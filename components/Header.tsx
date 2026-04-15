@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { SignInButton, SignUpButton, UserButton } from '@clerk/nextjs';
-import { useAuth } from '@clerk/nextjs';
-import { Button } from '@/components/ui/button';
+import { SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
+import { useAuth } from "@clerk/nextjs";
+import { Button } from "@/components/ui/button";
 
 export function Header() {
   const { isSignedIn, isLoaded } = useAuth();
@@ -19,14 +19,16 @@ export function Header() {
           {!isSignedIn ? (
             <>
               <SignInButton mode="modal">
-                <Button variant="outline" type="button">Sign In</Button>
+                <Button variant="outline" type="button">
+                  Sign In
+                </Button>
               </SignInButton>
               <SignUpButton mode="modal">
                 <Button type="button">Sign Up</Button>
               </SignUpButton>
             </>
           ) : (
-            <UserButton afterSignOutUrl="/" />
+            <UserButton />
           )}
         </div>
       </div>

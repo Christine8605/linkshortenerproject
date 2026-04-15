@@ -1,3 +1,7 @@
+---
+description: Read this before creating or modifying UI components for this project.
+---
+
 # shadcn/ui Component Standards
 
 This document defines the standards for using shadcn/ui components in this Link Shortener project. **All UI elements must use shadcn/ui components. Custom components are not permitted.**
@@ -19,16 +23,16 @@ This document defines the standards for using shadcn/ui components in this Link 
 
 Always use shadcn/ui components for common UI patterns:
 
-| Use Case | shadcn/ui Component |
-|----------|-------------------|
-| Interactive buttons | `<Button />` |
-| Text input fields | `<Input />` |
-| Forms & validation | `<Form />` with react-hook-form |
-| Modals/dialogs | `<Dialog />` |
-| Navigation menus | `<DropdownMenu />` |
-| Status feedback | `<Toast />` |
-| Data tables | `<DataTable />` |
-| Page layout | `<Card />`, `<Tabs />` |
+| Use Case            | shadcn/ui Component             |
+| ------------------- | ------------------------------- |
+| Interactive buttons | `<Button />`                    |
+| Text input fields   | `<Input />`                     |
+| Forms & validation  | `<Form />` with react-hook-form |
+| Modals/dialogs      | `<Dialog />`                    |
+| Navigation menus    | `<DropdownMenu />`              |
+| Status feedback     | `<Toast />`                     |
+| Data tables         | `<DataTable />`                 |
+| Page layout         | `<Card />`, `<Tabs />`          |
 
 ### Installation
 
@@ -109,6 +113,7 @@ Use shadcn/ui component variants for semantic styling:
 ## Common Components Reference
 
 ### Button
+
 ```typescript
 import { Button } from '@/components/ui/button';
 
@@ -119,6 +124,7 @@ import { Button } from '@/components/ui/button';
 ```
 
 ### Input
+
 ```typescript
 import { Input } from '@/components/ui/input';
 
@@ -128,6 +134,7 @@ import { Input } from '@/components/ui/input';
 ```
 
 ### Form
+
 ```typescript
 import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
@@ -144,6 +151,7 @@ import { Input } from '@/components/ui/input';
 ```
 
 ### Dialog/Modal
+
 ```typescript
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
@@ -160,6 +168,7 @@ import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle } from 
 ```
 
 ### Card
+
 ```typescript
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 

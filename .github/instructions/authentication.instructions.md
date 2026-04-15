@@ -1,3 +1,7 @@
+---
+description: Read this before implementing or modifying authentication for this project.
+---
+
 # Authentication (Clerk)
 
 This document defines the authentication standards for the Link Shortener project using Clerk. **All authentication must be handled exclusively through Clerk. No alternative authentication methods are permitted.**
@@ -61,13 +65,13 @@ export default function RootLayout({
 Always check for user authentication before performing protected operations:
 
 ```typescript
-import { auth } from '@clerk/nextjs/server';
+import { auth } from "@clerk/nextjs/server";
 
 export async function createLink(originalUrl: string) {
   const { userId } = await auth();
-  
+
   if (!userId) {
-    throw new Error('Unauthorized');
+    throw new Error("Unauthorized");
   }
 
   // Proceed with authenticated action
@@ -227,14 +231,14 @@ Protect API routes by checking `auth()`:
 
 ```typescript
 // /app/api/links/route.ts
-import { NextRequest, NextResponse } from 'next/server';
-import { auth } from '@clerk/nextjs/server';
+import { NextRequest, NextResponse } from "next/server";
+import { auth } from "@clerk/nextjs/server";
 
 export async function POST(req: NextRequest) {
   const { userId } = await auth();
 
   if (!userId) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   const body = await req.json();
@@ -274,22 +278,22 @@ For advanced route protection, use Clerk's `authMiddleware`:
 
 ```typescript
 // /middleware.ts
-import { auth } from '@clerk/nextjs/server';
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+import { auth } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
 export async function middleware(request: NextRequest) {
   const { userId } = await auth();
 
-  if (!userId && request.nextUrl.pathname === '/dashboard') {
-    return NextResponse.redirect(new URL('/sign-in', request.url));
+  if (!userId && request.nextUrl.pathname === "/dashboard") {
+    return NextResponse.redirect(new URL("/sign-in", request.url));
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*'],
+  matcher: ["/dashboard/:path*"],
 };
 ```
 
